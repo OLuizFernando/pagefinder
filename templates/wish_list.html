@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Wish List
+{% endblock %}
+
+{% block main %}
+    {% if user_wish_list %}
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-5 justify-content-center">
+                {% for book in user_wish_list %}
+                    <div class="col">
+                        <div class="card text-center bg-body-tertiary shadow">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">{{ book.title }}</h5>
+                                <h6 class="card-subtitle mb-5">{{ book.author }}</h5>
+                                <div class="d-flex flex-column">
+                                    {% if book.purchase_url %}
+                                        <a href="{{ book.purchase_url }}" target="_blank" class="btn btn-outline-warning mb-3">Purchase URL</a>
+                                    {% else %}
+                                        <button type="button" class="btn btn-outline-secondary mb-3" disabled>Purchase URL</button>
+                                    {% endif %}
+                                    <form action="/book_info" method="post">
+                                        <button type="submit" name="book_info" value="{{ book.authorship_id }}" class="btn btn-outline-light w-100">Book info</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-dark d-flex align-items-center fs-5 m-auto" role="alert">
+            <i class="bi bi-emoji-frown me-3"></i>
+            Your Wish List is empty for now. Try adding books by clicking the + button.
+        </div>
+    {% endif %}
+    <a href="/add_book" class="border position-fixed bottom-0 end-0 btn btn-warning rounded-circle m-3 m-sm-4 m-xl-5 shadow" style="height: 80px; width: 80px; font-size: 29px; padding-top: 17px;">
+        <i class="bi bi-plus-lg"></i>
+    </a>
+{% endblock %}

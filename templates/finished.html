@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Finished
+{% endblock %}
+
+{% block main %}
+    {% if user_finished %}
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-5 justify-content-center">
+                {% for book in user_finished %}
+                    <div class="col">
+                        <div class="card text-center bg-body-tertiary shadow">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">{{ book.title }}</h5>
+                                <h6 class="card-subtitle mb-5">{{ book.author }}</h5>
+                                <p class="card-text mb-1">Finish Date:</p>
+                                {% if book.finish_year and book.finish_month and book.finish_day %}
+                                    {% set year = book.finish_year | int %}
+                                    {% set month = book.finish_month | int %}
+                                    {% set day = book.finish_day | int %}
+                                    <p class="card-text mb-5">
+                                        {{ year | format_number }}/{{ month | format_number }}/{{ day | format_number }}
+                                    </p>
+                                {% else %}
+                                    <p class="card-text text-secondary mb-5">Not provided.</p>
+                                {% endif %}
+                                <div class="d-flex flex-column">
+                                <form action="/book_info" method="post">
+                                    <button type="submit" name="book_info" value="{{ book.authorship_id }}" class="btn btn-outline-light w-100">Book info</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-dark d-flex align-items-center fs-5 m-auto" role="alert">
+            <i class="bi bi-emoji-frown me-3"></i>
+            Your Finished List is empty for now. Try adding books by clicking the + button.
+        </div>
+    {% endif %}
+    <a href="/add_book" class="border position-fixed bottom-0 end-0 btn btn-warning rounded-circle m-3 m-sm-4 m-xl-5 shadow" style="height: 80px; width: 80px; font-size: 29px; padding-top: 17px;">
+        <i class="bi bi-plus-lg"></i>
+    </a>
+{% endblock %}

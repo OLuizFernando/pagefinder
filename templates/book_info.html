@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book Info
+{% endblock %}
+
+{% block main %}
+    <div class="m-auto w-75">
+        <table class="table table-hover align-middle">
+            <tbody class="fs-4">
+                <tr>
+                    <th scope="row">Book Title:</th>
+                    <td>{{ book_info.title }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Publication:</th>
+                    <td>{{ book_info.year }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Author:</th>
+                    <td>{{ book_info.author }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Author Birth:</th>
+                    <td>{{ book_info.birth }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <caption>
+            <form action="/delete_from_user_lists" method="post">
+                <button type="submit" name="delete" value="{{ book_info.authorship_id }}" class="btn btn-outline-danger">Delete from my lists</button>
+            </form>
+        </caption>
+    </div>
+{% endblock %}

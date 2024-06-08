@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Author Registered
+{% endblock %}
+
+{% block main %}
+    <div class="alert alert-success d-flex align-items-center fs-5 m-auto" role="alert">
+        <i class="bi bi-check-circle-fill me-3"></i>
+        <div>
+            {{ name }} has been successfully registered in our database. Now try <a href="/register_book" class="alert-link">registering a book</a> written by this author.
+        </div>
+    </div>
+{% endblock %}

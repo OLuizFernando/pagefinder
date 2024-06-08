@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book Registered
+{% endblock %}
+
+{% block main %}
+    <div class="alert alert-success d-flex align-items-center fs-5 m-auto" role="alert">
+        <i class="bi bi-check-circle-fill me-3"></i>
+        <div>
+            {{ title }} has been successfully registered in our database. Now try <a href="/add_book" class="alert-link">adding this book to your Reading List, Wish List, or Finished List</a>.
+        </div>
+    </div>
+{% endblock %}

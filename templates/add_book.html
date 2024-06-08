@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Book
+{% endblock %}
+
+{% block main %}
+    <script>
+        function handleActionChange() {
+            var optionalInputsLabel = document.getElementById("optionalInputsLabel")
+            var actionSelect = document.getElementById("actionSelect")
+            var totalPagesInput = document.getElementById("totalPagesInput")
+            var pagesReadInput = document.getElementById("pagesReadInput")
+            var purchaseUrlInput = document.getElementById("purchaseUrlInput")
+            var finishDateInput = document.getElementById("finishDateInput")
+            var finishDateLabel = document.getElementById("finishDateLabel")
+
+            if (actionSelect.value === "reading") {
+                purchaseUrlInput.style.display = "none"
+                finishDateInput.style.display = "none"
+                finishDateLabel.style.display = "none"
+
+                optionalInputsLabel.style.display = "block"
+                totalPagesInput.style.display = "block"
+                totalPagesInput.required = true
+                pagesReadInput.style.display = "block"
+            } else if (actionSelect.value === "wish_list") {
+                totalPagesInput.style.display = "none"
+                totalPagesInput.required = false
+                pagesReadInput.style.display = "none"
+                finishDateInput.style.display = "none"
+                finishDateLabel.style.display = "none"
+
+                optionalInputsLabel.style.display = "block"
+                purchaseUrlInput.style.display = "block"
+            } else if (actionSelect.value === "finished") {
+                totalPagesInput.style.display = "none"
+                totalPagesInput.required = false
+                pagesReadInput.style.display = "none"
+                purchaseUrlInput.style.display = "none"
+
+                optionalInputsLabel.style.display = "block"
+                finishDateInput.style.display = "block"
+                finishDateLabel.style.display = "block"
+            } else {
+                optionalInputsLabel.style.display = "none"
+                totalPagesInput.style.display = "none"
+                totalPagesInput.required = false
+                pagesReadInput.style.display = "none"
+                purchaseUrlInput.style.display = "none"
+                finishDateInput.style.display = "none"
+                finishDateLabel.style.display = "none"
+            }
+        }
+    </script>
+
+    <div class="m-auto">
+        <form action="/add_book" method="post">
+            <div class="mb-3">
+                <input required autofocus autocomplete="off" class="form-control form-control-lg mx-auto" name="title" placeholder="Book title" type="text">
+            </div>
+            <div class="mb-3">
+                <input required autocomplete="off" class="form-control form-control-lg mx-auto" name="author" placeholder="Author name" type="text">
+            </div>
+            <div class="mb-3">
+                <select class="form-select form-select-lg" name="action" id="actionSelect" onchange="handleActionChange()">
+                    <option selected disabled>Select an action</option>
+                    <option value="reading">Add to my reading list</option>
+                    <option value="wish_list">Add to my wish list</option>
+                    <option value="finished">Add to my finished list</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control form-control-lg mx-auto" name="total_pages" id="totalPagesInput" placeholder="Total number of pages" type="number" min="1" style="display: none;">
+            </div>
+            <div class="mb-3">
+                <label id="optionalInputsLabel" class="form-label" style="display: none;">Optional</label>
+                <input autocomplete="off" class="form-control form-control-lg mx-auto" name="pages_read" id="pagesReadInput" placeholder="Number of pages read" type="number" min="0" style="display: none;">
+                <input autocomplete="off" class="form-control form-control-lg mx-auto" name="purchase_url" id="purchaseUrlInput" placeholder="Purchase URL" type="text" style="display: none;">
+                <label for="finishDateInput" id="finishDateLabel" class="form-label" style="display: none;">Finish date:</label>
+                <input autocomplete="off" class="form-control form-control-lg mx-auto" name="finish_date" id="finishDateInput" type="date" style="display: none;">
+            </div>
+            <div class="d-flex flex-column">
+                <button class="btn btn-outline-warning btn-lg">Add book</button>
+            </div>
+        </form>
+        <div class="text-center text-secondary mt-5">
+            Register a new <a href="/register_book" class="text-secondary-emphasis">book</a> or <a href="/register_author" class="text-secondary-emphasis">author</a> to our database
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

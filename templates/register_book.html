@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register Book
+{% endblock %}
+
+{% block main %}
+    <div class="m-auto">
+        <form action="/register_book" method="post">
+            <div class="mb-3">
+                <input autofocus required autocomplete="off" class="form-control form-control-lg mx-auto" name="title" placeholder="Book title" type="text">
+            </div>
+            <div class="mb-3">
+                <input required autocomplete="off" class="form-control form-control-lg mx-auto" name="author" placeholder="Author name" type="text">
+            </div>
+            <div class="mb-3">
+                <input required autocomplete="off" class="form-control form-control-lg mx-auto" name="year" placeholder="Publication year" type="number">
+            </div>
+            <div class="d-flex flex-column">
+                <button class="btn btn-outline-warning btn-lg">Register book</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="pb-5 text-secondary">
+        Register a new <a href="/register_author" class="text-secondary-emphasis">author</a> to our database
+    </div>
+{% endblock %}

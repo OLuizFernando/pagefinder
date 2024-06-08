@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Readings
+{% endblock %}
+
+{% block main %}
+    {% if user_readings %}
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-5 justify-content-center">
+                {% for reading in user_readings %}
+                    {% set progress = ((reading.pages_read / reading.total_pages) * 100)|int %}
+                    <div class="col">
+                        <div class="card text-center bg-body-tertiary shadow">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">{{ reading.title }}</h5>
+                                <h6 class="card-subtitle mb-5">{{ reading.author }}</h5>
+                                <p class="card-text mb-1">{{ progress }}%</p>
+                                <div class="progress mb-2" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-warning" style="width: {{ progress }}%"></div>
+                                </div>
+                                <p class="card-text mb-1">Pages read:</p>
+                                <p class="card-text mb-5">{{ reading.pages_read }} / {{ reading.total_pages }}</p>
+                                <div class="d-flex flex-column">
+                                    <form action="/update_reading" method="post" class="mb-3">
+                                        <button type="submit" name="goto_update_reading" value="{{ reading.reading_id }}" class="btn btn-outline-warning w-100">Update reading</button>
+                                    </form>
+                                    <form action="/book_info" method="post">
+                                        <button type="submit" name="book_info" value="{{ reading.authorship_id }}" class="btn btn-outline-light w-100">Book info</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% else %}
+        <div class="alert alert-dark d-flex align-items-center fs-5 m-auto" role="alert">
+            <i class="bi bi-emoji-frown me-3"></i>
+            Your Reading list is empty for now. Try adding books by clicking the + button.
+        </div>
+    {% endif %}
+    <a href="/add_book" class="border position-fixed bottom-0 end-0 btn btn-warning rounded-circle m-3 m-sm-4 m-xl-5 shadow" style="height: 80px; width: 80px; font-size: 29px; padding-top: 17px;">
+        <i class="bi bi-plus-lg"></i>
+    </a>
+{% endblock %}
