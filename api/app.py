@@ -1,9 +1,9 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, send_from_directory, session
 from flask_session import Session
-from helpers import login_required, format_number
+from api.helpers import login_required, format_number
 from datetime import datetime
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -243,6 +243,15 @@ def delete_from_user_lists():
     db.execute("DELETE FROM wish_lists WHERE user_id = ? AND authorship_id = ?", session["user_id"], authorship_id)
     db.execute("DELETE FROM finished WHERE user_id = ? AND authorship_id = ?", session["user_id"], authorship_id)
     return redirect("/")
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        os.path.join(app.root_path, 'static'),
+        'favicon.ico',
+        mimetype='image/vnd.microsoft.icon'
+    )
 
 
 @app.route("/finished")
