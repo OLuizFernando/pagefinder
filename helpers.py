@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, session
+from flask import redirect, session
 from functools import wraps
 
 def login_required(f):
