@@ -1,5 +1,3 @@
 .vercel
 
-.vercel
-
-venv
+venv/
