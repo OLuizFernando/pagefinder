@@ -540,3 +540,7 @@ def wish_list():
     user_wish_list.reverse()
 
     return render_template("wish_list.html", user_wish_list=user_wish_list)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
