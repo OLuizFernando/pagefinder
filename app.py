@@ -1,10 +1,10 @@
 import os
 
+from cs50 import SQL
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, send_from_directory, session
 from flask_session import Session
 from .helpers import login_required, format_number
-import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
 
 # Configure application
@@ -20,8 +20,7 @@ app.jinja_env.filters['format_number'] = format_number
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-conn = sqlite3.connect('pagefinder.db', check_same_thread=False)
-db = conn.cursor()
+db = SQL("sqlite:///pagefinder.db")
 
 
 @app.after_request
@@ -364,7 +363,7 @@ def reading():
     )
     AND readings.user_id = ?
     '''
-    user_readings = db.execute(query, (session["user_id"], session["user_id"])).fetchall()
+    user_readings = db.execute(query, session["user_id"], session["user_id"])
     user_readings.reverse()
 
     return render_template("readings.html", user_readings=user_readings)
