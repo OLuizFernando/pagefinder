@@ -20,7 +20,7 @@ app.jinja_env.filters['format_number'] = format_number
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-conn = sqlite3.connect('pagefinder.db')
+conn = sqlite3.connect('pagefinder.db', check_same_thread=False)
 db = conn.cursor()
 
 
