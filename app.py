@@ -13,9 +13,6 @@ app = Flask(__name__)
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['UPLOAD_FOLDER'] = 'book_covers'
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB
-app.config['ALLOWED_EXTENSIONS'] = {'jpeg', 'jpg', 'jfif', 'pjpeg', 'pjp', 'png', 'webp'}
 app.jinja_env.filters['format_number'] = format_number
 Session(app)
 
