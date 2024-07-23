@@ -13,6 +13,7 @@ et-xmlfile==1.1.0
 Flask==3.0.3
 Flask-Session==0.8.0
 greenlet==3.0.3
+gunicorn==20.1.0
 importlib_metadata==8.0.0
 isodate==0.6.1
 itsdangerous==2.2.0
