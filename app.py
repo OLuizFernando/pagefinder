@@ -4,7 +4,7 @@ from cs50 import SQL
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, send_from_directory, session
 from flask_session import Session
-from .helpers import login_required, format_number
+from helpers import login_required, format_number
 from werkzeug.security import check_password_hash, generate_password_hash
 
 # Configure application
@@ -469,7 +469,7 @@ def register_book():
 @app.route("/tester_login")
 def tester_login():
     session.clear()
-    session["user_id"] = 16
+    session["user_id"] = 1
 
     return redirect("/")
 
