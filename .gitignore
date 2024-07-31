@@ -3,5 +3,3 @@ __pycache__/
 flask_session/
 
 venv/
-
-pagefinder.db
