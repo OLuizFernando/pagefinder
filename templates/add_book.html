@@ -57,10 +57,12 @@
     <div class="m-auto">
         <form action="/add_book" method="post">
             <div class="mb-3">
-                <input required autofocus autocomplete="off" class="form-control form-control-lg mx-auto" name="title" placeholder="Book title" type="text">
+                <input required autofocus autocomplete="off" class="form-control form-control-lg mx-auto" name="title" id="titleInput" placeholder="Book title" type="text">
+                <div class="suggestion-box rounded-3" id="titlesSuggestions"></div>
             </div>
             <div class="mb-3">
-                <input required autocomplete="off" class="form-control form-control-lg mx-auto" name="author" placeholder="Author name" type="text">
+                <input required autocomplete="off" class="form-control form-control-lg mx-auto" name="author" id="nameInput" placeholder="Author name" type="text">
+                <div class="suggestion-box rounded-3" id="namesSuggestions"></div>
             </div>
             <div class="mb-3">
                 <select class="form-select form-select-lg" name="action" id="actionSelect" onchange="handleActionChange()">
@@ -88,6 +90,15 @@
             Register a new <a href="/register_book" class="text-secondary-emphasis">book</a> or <a href="/register_author" class="text-secondary-emphasis">author</a> to our database
         </div>
     </div>
+
+    <script>
+        window.books = {{ book_titles | tojson }}
+        window.titles = window.books.map(book => book.title)
+        
+        window.authors = {{ author_names | tojson }}
+        window.names = window.authors.map(author => author.name)
+    </script>
+    <script src="../static/add_book/autosuggest.js"></script>
 {% endblock %}
 
 {% block footer %}

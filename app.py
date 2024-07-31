@@ -126,7 +126,10 @@ def add_book():
             return redirect("/finished")
 
     else:
-        return render_template("add_book.html")
+        book_titles = db.execute("SELECT title FROM books")
+        author_names = db.execute("SELECT name FROM authors")
+
+        return render_template("add_book.html", book_titles=book_titles, author_names=author_names)
 
 
 @app.route("/book_info", methods=["POST"])

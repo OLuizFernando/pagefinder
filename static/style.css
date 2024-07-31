@@ -1,0 +1,32 @@
+.logo-font-semibold
+{
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.suggestion-box ul
+{
+  background-color: #2b3035;
+  border-top: 1px solid #495057;
+  padding: 10px 10px;
+}
+
+.suggestion-box ul li
+{
+  list-style: none;
+  border-radius: 3px;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+.suggestion-box ul li:hover
+{
+  background-color: #212529;
+}
+
+.suggestion-box
+{
+  max-height: 300px;
+  overflow-y: scroll;
+}
