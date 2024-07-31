@@ -1,4 +1,6 @@
-# PageFinder
+![PageFinder logo](pagefinder.png)
+
+## 📚 AVAILABLE IN: [pagefinder.vercel.app](https://pagefinder.vercel.app)
 
 ### Video Demo:
 [PageFinder Demonstration on YouTube](https://youtu.be/tuKbJ0SmAjI)
