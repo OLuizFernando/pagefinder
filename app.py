@@ -3,7 +3,6 @@ import os
 from cs50 import SQL
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, send_from_directory, session
-from flask_session import Session
 from helpers import login_required, format_number
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -12,12 +11,11 @@ app = Flask(__name__)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.jinja_env.filters['format_number'] = format_number
-Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///pagefinder.db")
+db = SQL(os.getenv("POSTGRESQL_URL"))
 
 
 @app.after_request
@@ -61,9 +59,9 @@ def add_book():
         if not pages_read:
             pages_read = 0
 
-        book_id = db.execute("SELECT book_id FROM books WHERE title LIKE ?", f"%{title}%")
+        book_id = db.execute("SELECT book_id FROM books WHERE title ILIKE ?", f"%{title}%")
 
-        author_id = db.execute("SELECT author_id FROM authors WHERE name LIKE ?", f"%{author}%")
+        author_id = db.execute("SELECT author_id FROM authors WHERE name ILIKE ?", f"%{author}%")
 
         if not book_id:
             flash("Book not found. Try to register a new book to our database.")
@@ -446,7 +444,7 @@ def register_book():
             flash("Invalid publication year.")
             return render_template("register_book.html")
 
-        author_id = db.execute("SELECT author_id FROM authors WHERE name LIKE ?", f"%{author}%")
+        author_id = db.execute("SELECT author_id FROM authors WHERE name ILIKE ?", f"%{author}%")
 
         if not author_id:
             flash("Author not found. Try to register a new author to our database.")
@@ -455,7 +453,7 @@ def register_book():
         try:
             db.execute("INSERT INTO books (title, year) VALUES (?, ?)", title, year)
 
-            book_id = db.execute("SELECT book_id FROM books WHERE title LIKE ? AND year = ?", f"%{title}%", year)
+            book_id = db.execute("SELECT book_id FROM books WHERE title ILIKE ? AND year = ?", f"%{title}%", year)
 
             db.execute("INSERT INTO authorships (author_id, book_id) VALUES (?, ?)", author_id[0]["author_id"], book_id[0]["book_id"])
 

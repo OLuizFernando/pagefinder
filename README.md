@@ -4,7 +4,7 @@
 [PageFinder Demonstration on YouTube](https://youtu.be/tuKbJ0SmAjI)
 
 ### Description:
-PageFinder is a responsive web application created as the Final Project for Harvard's CS50x 2024 course. Developed using Python with Flask, HTML, CSS, and JavaScript with Bootstrap, and SQLite, it allows users to manage their reading activities. Users can register and log in to their accounts, and add books to their "Reading List", "Wish List", or "Finished List". The platform provides an intuitive interface for tracking current reads, planning future books, and recording completed titles. Additionally, users contribute to the community-driven database by registering new books and authors, enhancing the collective resource for all users.
+PageFinder is a responsive web application created as the Final Project for Harvard's CS50x 2024 course. Developed using Python with Flask, HTML, CSS, and JavaScript with Bootstrap, and PostgreSQL, it allows users to manage their reading activities. Users can register and log in to their accounts, and add books to their "Reading List", "Wish List", or "Finished List". The platform provides an intuitive interface for tracking current reads, planning future books, and recording completed titles. Additionally, users contribute to the community-driven database by registering new books and authors, enhancing the collective resource for all users.
 
 ### Features:
 - User registration and login
