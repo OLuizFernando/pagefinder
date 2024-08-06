@@ -9,8 +9,9 @@
         <div class="mb-3">
             <input required autocomplete="off" autofocus class="form-control form-control-lg mx-auto" name="username" placeholder="Username" type="text">
         </div>
-        <div class="mb-3">
-            <input required class="form-control form-control-lg mx-auto" name="password" placeholder="Password" type="password">
+        <div class="mb-3 position-relative">
+            <input required class="form-control form-control-lg" name="password" id="password" placeholder="Password" type="password">
+            <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y pe-3" id="togglePassword" style="cursor: pointer; color: #495057;"></i>
         </div>
         <div class="mb-3">
             <input required class="form-control form-control-lg mx-auto" name="confirm_password" placeholder="Confirm password" type="password">
@@ -19,4 +20,6 @@
             <button class="btn btn-outline-warning btn-lg">Register</button>
         </div>
     </form>
+
+    <script src="../static/toggle_password.js"></script>
 {% endblock %}
