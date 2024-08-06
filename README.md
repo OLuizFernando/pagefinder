@@ -34,7 +34,7 @@ In the "Add Book" section, accessed by clicking the plus button in the bottom ri
 - CSS
 - JavaScript
 - Bootstrap
-- SQLite
+- PostgreSQL
 
 ### Database Schema
 ![Schema Image](db_schema.png)
