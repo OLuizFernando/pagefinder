@@ -50,11 +50,11 @@ def add_book():
 
         if not action:
             flash("You must select an action.")
-            return render_template("add_book.html")
+            return render_template("add_book.html", book_titles=book_titles, author_names=author_names)
 
         if not title or not author or (action == "reading" and not total_pages):
             flash("You must fill in all fields.")
-            return render_template("add_book.html")
+            return render_template("add_book.html", book_titles=book_titles, author_names=author_names)
 
         if not pages_read:
             pages_read = 0
@@ -65,11 +65,11 @@ def add_book():
 
         if not book_id:
             flash("Book not found. Try to register a new book to our database.")
-            return render_template("add_book.html")
+            return render_template("add_book.html", book_titles=book_titles, author_names=author_names)
 
         if not author_id:
             flash("Author not found. Try to register a new author to our database.")
-            return render_template("add_book.html")
+            return render_template("add_book.html", book_titles=book_titles, author_names=author_names)
 
         try:
             authorship_id = db.execute(
