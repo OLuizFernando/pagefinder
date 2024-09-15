@@ -71,13 +71,15 @@ def add_book():
             flash("Author not found. Try to register a new author to our database.")
             return render_template("add_book.html")
 
-        try:
-            authorship_id = db.execute(
-                "SELECT authorship_id FROM authorships WHERE book_id = ? AND author_id = ?",book_id[0]["book_id"], author_id[0]["author_id"]
-            )[0]["authorship_id"]
+        authorship_id = db.execute(
+            "SELECT authorship_id FROM authorships WHERE book_id = ? AND author_id = ?",book_id[0]["book_id"], author_id[0]["author_id"]
+        )
 
-        except:
-            flash("Book and/or author not found. Try to register a new book/author to our database.")
+        try:
+            authorship_id = authorship_id[0]["authorship_id"]
+        
+        except IndexError:
+            flash("Probably this book was not written by this author, please check and try again.")
             return render_template("add_book.html")
 
         if action == "reading":
