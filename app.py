@@ -75,12 +75,11 @@ def add_book():
             "SELECT authorship_id FROM authorships WHERE book_id = ? AND author_id = ?",book_id[0]["book_id"], author_id[0]["author_id"]
         )
 
-        try:
-            authorship_id = authorship_id[0]["authorship_id"]
-        
-        except IndexError:
+        if not len(authorship_id):
             flash("Probably this book was not written by this author, please check and try again.")
             return render_template("add_book.html")
+        
+        authorship_id = authorship_id[0]["authorship_id"]
 
         if action == "reading":
             db.execute(
