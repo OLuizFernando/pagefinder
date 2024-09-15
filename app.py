@@ -47,6 +47,8 @@ def add_book():
         pages_read = request.form.get("pages_read")
         purchase_url = request.form.get("purchase_url")
         finish_date = request.form.get("finish_date")
+        book_titles = db.execute("SELECT title FROM books")
+        author_names = db.execute("SELECT name FROM authors")
 
         if not action:
             flash("You must select an action.")
